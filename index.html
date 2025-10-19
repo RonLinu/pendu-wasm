@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- PENDU - WASM -->
+<html lang="en">
+<head>
+    <title>Pendu - WASM</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="pendu/pendu_icon.png">
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11" onload="startWASM()"></script>
+</head>
+
+<body>
+    <script src="wasm_exec.js"></script>
+    <script>
+        function startWASM() {
+            const go = new Go();
+            WebAssembly.instantiateStreaming(fetch("pendu.wasm"), go.importObject).then((result) => {
+                go.run(result.instance);
+            });
+        }
+    </script>
+    
+    <div id="header">
+      <ul id="scores"><br><br><br></ul>
+    </div>
+    
+    <div id="stage">
+      <img id="gallows" src="pendu/pendu_splash.png" alt="Image" width="250" height="250">
+    </div>
+
+    <div id="footer">
+    </div>
+
+
+</body>
+</html>
